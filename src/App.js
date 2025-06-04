@@ -17,7 +17,7 @@ const [success, setSuccess] = useState('');
 
 // check if user has logged in the cloud services
 useEffect(() => {
-  axios.get('http://localhost:5000/me', { withCredentials: true })
+  axios.get('https://diss-frontend.onrender.com/me', { withCredentials: true })
     .then(res => setAuth(res.data))
     .catch(() => setAuth({ google: false, microsoft: false, dropbox: false }));
   fetchFiles();
@@ -69,7 +69,7 @@ const handleUpload = async () => {
   formData.append('targets', JSON.stringify(targets));
 
   try {
-    await axios.post('http://localhost:5000/upload', formData, {
+    await axios.post('https://diss-frontend.onrender.com/upload', formData, {
       withCredentials: true
     });
     await fetchFiles();
@@ -84,7 +84,7 @@ const handleUpload = async () => {
 // fetch and display uplaoded files
 const fetchFiles = async () => {
   try {
-    const res = await axios.get('http://localhost:5000/files', { withCredentials: true });
+    const res = await axios.get('https://diss-frontend.onrender.com/files', { withCredentials: true });
     setFiles(res.data);
   } catch (err) {
     console.error(err);
@@ -95,7 +95,7 @@ const fetchFiles = async () => {
 // handle file deletion
 const handleDelete = async (filename) => {
   try {
-    await axios.delete('http://localhost:5000/delete', {
+    await axios.delete('https://diss-frontend.onrender.com/delete', {
       data: { filename },
       withCredentials: true
     });
@@ -130,17 +130,17 @@ return (
     {!auth.google || !auth.microsoft || !auth.dropbox ? (
       <div className="section login-buttons">
         {!auth.google && (
-          <a href="http://localhost:5000/auth/google" className="button">
+          <a href="https://diss-frontend.onrender.com/auth/google" className="button">
             Login with Google
           </a>
         )}
         {!auth.microsoft && (
-          <a href="http://localhost:5000/auth/microsoft" className="button">
+          <a href="https://diss-frontend.onrender.com/auth/microsoft" className="button">
             Login with Microsoft
           </a>
         )}
         {!auth.dropbox && (
-          <a href="http://localhost:5000/auth/dropbox" className="button">
+          <a href="https://diss-frontend.onrender.com/auth/dropbox" className="button">
             Login with Dropbox
           </a>
         )}
